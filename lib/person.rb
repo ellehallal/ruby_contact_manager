@@ -19,9 +19,9 @@ class Person
     @last_name = $stdin.gets.chomp
   end
 
-  # def get_phone_number
-  #   puts "Please enter the email address below:"
-  #   @phone_number = $stdin.gets.chomp
-  # end
+  def get_phone_number
+    puts "Please enter the email address below:"
+    @phone_number = $stdin.gets.chomp
+  end
 
 end
