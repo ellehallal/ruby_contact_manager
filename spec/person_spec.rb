@@ -26,22 +26,30 @@ RSpec.describe Person do
     expect(my_person.phone_number).to eq("phone")
   end
 
-  it "returns 'Elle' as input" do
+  it "accepts 'Elle' as input for get_first_name" do
     allow($stdin).to receive(:gets).and_return("Elle")
-    my_person = Person.new.first_name
-    my_person = $stdin.gets.chomp
-    expect(my_person).to eq("Elle")
+    my_person = Person.new
+    my_person_get_first_name = my_person.get_first_name
+    my_person_get_first_name = $stdin.gets.chomp
+    expect(my_person.first_name).to eq("Elle")
   end
 
-  it "accepts input from the user and changes value of first_name to 'Sarah'" do
-    my_person = Person.new
-    expect(my_person.get_first_name).to eq("Sarah")
-  end
+  # it "accepts 'Hallal' as input for get_last_name" do
+  #   allow($stdin).to receive(:gets).with("Elle")
+  #   my_person = Person.new.get_last_name
+  #   my_person = $stdin.gets.chomp
+  #   expect(my_person).to eq("Hallal")
+  # end
 
-  it "accepts input from the user and changes value of first_name to 'Kharraz'" do
-    my_person = Person.new
-    expect(my_person.get_last_name).to eq("Kharraz")
-  end
+  # it "accepts input from the user and changes value of first_name to 'Sarah'" do
+  #   my_person = Person.new
+  #   expect(my_person.get_first_name).to eq("Sarah")
+  # end
+  #
+  # it "accepts input from the user and changes value of first_name to 'Kharraz'" do
+  #   my_person = Person.new
+  #   expect(my_person.get_last_name).to eq("Kharraz")
+  # end
 
   # it "accepts input from the user and changes value of email_address" do
   #   my_person = Person.new
