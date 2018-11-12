@@ -9,4 +9,9 @@ class Person
     @phone_number = phone_number
   end
 
+  def get_first_name
+    puts "Please enter the first name below:"
+    @first_name = $stdin.gets.chomp
+  end
+
 end
