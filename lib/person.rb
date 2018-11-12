@@ -2,11 +2,11 @@ class Person
 
   attr_reader :first_name, :last_name, :email_address, :phone_number
 
-  def initialize(first_name="", last_name="", email_address="", phone_number="")
-    @first_name = first_name
-    @last_name = last_name
-    @email_address = email_address
-    @phone_number = phone_number
+  def initialize
+    @first_name = "first name"
+    @last_name = "last name"
+    @email_address = "email"
+    @phone_number = "phone"
   end
 
   def get_first_name
@@ -18,5 +18,10 @@ class Person
     puts "Please enter the last name below:"
     @last_name = $stdin.gets.chomp
   end
+
+  # def get_phone_number
+  #   puts "Please enter the email address below:"
+  #   @phone_number = $stdin.gets.chomp
+  # end
 
 end
