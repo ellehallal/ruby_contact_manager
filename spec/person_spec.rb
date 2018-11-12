@@ -32,6 +32,13 @@ RSpec.describe Person do
     expect(my_person.phone_number).to eq("")
   end
 
+  it "returns 'Elle' as input" do
+    allow($stdin).to receive(:gets).and_return('Elle')
+    my_person = Person.new.first_name
+    my_person = $stdin.gets.chomp
+    expect(my_person).to eq('Elle')
+  end
+
 
 
 end
