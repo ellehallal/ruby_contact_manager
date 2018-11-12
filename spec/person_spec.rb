@@ -10,4 +10,28 @@ RSpec.describe Person do
     my_person = Person.new
     expect(my_person.first_name).to eq("")
   end
+
+  it "creates instance variable @@last_name with an empty string value" do
+    my_person = Person.new
+    expect(my_person.last_name).to eq("")
+    expect(my_person.email_address).to eq("")
+    expect(my_person.phone_number).to eq("")
+  end
+
+  it "creates instance variable @@email_address with an empty string value" do
+    my_person = Person.new
+    expect(my_person.last_name).to eq("")
+    expect(my_person.email_address).to eq("")
+    expect(my_person.phone_number).to eq("")
+  end
+
+  it "creates instance variable @@phone_number with an empty string value" do
+    my_person = Person.new
+    expect(my_person.last_name).to eq("")
+    expect(my_person.email_address).to eq("")
+    expect(my_person.phone_number).to eq("")
+  end
+
+
+
 end
