@@ -38,13 +38,12 @@ class Person
   end
 
   def display_person
-    puts %Q(
-    Here's your new entry:
-    First name: #{@first_name}
-    Last name: #{@last_name}
-    Email address: #{@email_address}
-    Phone number: #{@phone_number}
-    )
+    puts "Here's your new entry:"
+    puts "First name: #{@first_name}"
+    puts "Last name: #{@last_name}"
+    puts "Email address: #{@email_address}"
+    puts "Phone number: #{@phone_number}"
+
   end
 
 end
