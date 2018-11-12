@@ -54,19 +54,6 @@ RSpec.describe Person do
     expect(my_person.phone_number).to eq("07999999999")
   end
 
-  xit "returns a string which includes first_name, last_name, email, phone" do
-    my_person = Person.new
-    my_person.first_name = "Elle"
-    my_person.last_name = "Tamara"
-    my_person.email_address = "elle@elle.com"
-    my_person.phone_number = "07999999999"
-    expect {my_person.display_info}.to output("""
-      First name: Elle
-      Last name: Tamara
-      Email address: elle@elle.com
-      Phone number: 07999999999
-      """).to_stdout
-  end
 
 
 

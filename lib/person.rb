@@ -9,6 +9,14 @@ class Person
     @phone_number = "phone"
   end
 
+  def get_display_person_details
+    get_first_name
+    get_last_name
+    get_email_address
+    get_phone_number
+    display_person
+  end
+
   def get_first_name
     puts "Please enter the first name below:"
     @first_name = $stdin.gets
@@ -29,8 +37,14 @@ class Person
     @phone_number = $stdin.gets
   end
 
-
-
-
+  def display_person
+    puts %Q(
+    Here's your new entry:
+    First name: #{@first_name}
+    Last name: #{@last_name}
+    Email address: #{@email_address}
+    Phone number: #{@phone_number}
+    )
+  end
 
 end
