@@ -3,10 +3,12 @@
 # Allows you to require any file in lib
 $: << File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'person'
+require 'contact'
 
-new_person = Person.new
-new_person.get_display_person_details
+new_person = Contact.new
+new_person.create_new_entry
+new_person.create_new_entry
+new_person.display_contacts
 
 # Require files here to experiment with them in an irb session
 
