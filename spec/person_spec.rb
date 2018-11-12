@@ -31,7 +31,6 @@ RSpec.describe Person do
     my_person = Person.new
     my_person_get_first_name = my_person.get_first_name
     my_person_get_first_name = $stdin.gets.chomp
-    puts my_person.first_name
     expect(my_person.first_name).to eq("Elle")
   end
 
@@ -40,7 +39,6 @@ RSpec.describe Person do
     my_person = Person.new
     my_person_get_last_name = my_person.get_last_name
     my_person_get_last_name = $stdin.gets.chomp
-    puts my_person.last_name
     expect(my_person.last_name).to eq("Tamara")
   end
 
@@ -49,8 +47,15 @@ RSpec.describe Person do
     my_person = Person.new
     my_person_get_email_address = my_person.get_email_address
     my_person_get_email_address = $stdin.gets.chomp
-    puts my_person.email_address
     expect(my_person.email_address).to eq("elle@elle.com")
+  end
+
+  it "accepts '07999999999' as input for get_phone_number. sets value of phone_number to 07999999999" do
+    allow($stdin).to receive(:gets).and_return("07999999999")
+    my_person = Person.new
+    my_person_get_phone_number = my_person.get_phone_number
+    my_person_get_phone_number = $stdin.gets.chomp
+    expect(my_person.phone_number).to eq("07999999999")
   end
 
   # it "accepts '07999999999' as input for get_phone_number sets value of phone_number to elle@elle.com" do
