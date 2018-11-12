@@ -38,6 +38,11 @@ RSpec.describe Person do
     expect(my_person.get_first_name).to eq("Sarah")
   end
 
+  it "accepts input from the user and changes value of first_name to 'Kharraz'" do
+    my_person = Person.new
+    expect(my_person.get_last_name).to eq("Kharraz")
+  end
+
 
 
 

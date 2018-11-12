@@ -14,4 +14,9 @@ class Person
     @first_name = $stdin.gets.chomp
   end
 
+  def get_last_name
+    puts "Please enter the last name below:"
+    @last_name = $stdin.gets.chomp
+  end
+
 end
