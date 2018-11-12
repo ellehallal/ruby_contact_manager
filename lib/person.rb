@@ -43,7 +43,6 @@ class Person
     puts "Last name: #{@last_name}"
     puts "Email address: #{@email_address}"
     puts "Phone number: #{@phone_number}"
-
   end
 
 end
