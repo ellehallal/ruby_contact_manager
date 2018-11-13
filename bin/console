@@ -9,6 +9,7 @@ my_contacts = Contact.new
 my_contacts.create_new_entry
 my_contacts.create_new_entry
 my_contacts.search_first_name("E")
+my_contacts.display_contacts
 
 # Require files here to experiment with them in an irb session
 

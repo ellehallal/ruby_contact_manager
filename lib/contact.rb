@@ -44,7 +44,7 @@ class Contact
       entry[:first_name].start_with?(search_term)
     end
 
-    puts "First names which start with #{search_term}"
+    puts "Contacts with first names starting with #{search_term}"
     puts ""
     search.each do |entry|
       entry.each do |key, value|
