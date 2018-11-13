@@ -22,6 +22,7 @@ class Contact
 
 
     new_contact = Person.new(first_name, last_name, email_address, phone_number)
+    
     new_contact.get_display_person_details
     @contacts.push(new_contact.create_person_hash)
   end
