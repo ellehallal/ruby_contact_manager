@@ -5,7 +5,6 @@ class Contact
 
   def initialize
     @contacts = []
-    self.begin
   end
 
   def begin
@@ -59,6 +58,8 @@ class Contact
     end
     puts "Thanks for using Contact Manager"
   end
+
+  # private
 
   def create_new_entry
     puts "Please enter the first name below:"
@@ -115,10 +116,10 @@ class Contact
   def search_first_name(search_term)
     sort_by_first_name
     search = @contacts.select do |entry|
-      entry[:first_name].start_with?(search_term)
+      entry[:first_name].start_with?(search_term.capitalize)
     end
 
-    puts "Contacts with first names starting with #{search_term}:"
+    puts "Contacts with first names starting with #{search_term.capitalize}:"
     puts ""
     search.each do |entry|
       entry.each do |key, value|
@@ -131,10 +132,10 @@ class Contact
   def search_last_name(search_term)
     sort_by_first_name
     search = @contacts.select do |entry|
-      entry[:last_name].start_with?(search_term)
+      entry[:last_name].start_with?(search_term.capitalize)
     end
 
-    puts "Contacts with last names starting with #{search_term}:"
+    puts "Contacts with last names starting with #{search_term.capitalize}:"
     puts ""
     search.each do |entry|
       entry.each do |key, value|
