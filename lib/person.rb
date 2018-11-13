@@ -38,7 +38,7 @@ class Person
   end
 
   def display_person
-    puts "Here's your new entry:"
+    puts "Here's your contact:"
     puts "First name: #{@first_name}"
     puts "Last name: #{@last_name}"
     puts "Email address: #{@email_address}"

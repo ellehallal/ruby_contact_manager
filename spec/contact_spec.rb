@@ -11,16 +11,17 @@ RSpec.describe Contact do
     expect(my_contacts.contacts).to eq([])
   end
 
-  it "creates a new contact using the Person class and adds it to @contacts" do
+  xit "creates a new contact using the Person class and adds it to @contacts" do
     my_contacts = Contact.new
     my_contacts.create_new_entry
     expect(my_contacts.contacts.empty?).to eq(false)
   end
 
-  it "creates two new contacts using the Person class and adds both to @contacts" do
+  xit "creates two new contacts using the Person class and adds both to @contacts" do
     my_contacts = Contact.new
     my_contacts.create_new_entry
     my_contacts.create_new_entry
     expect(my_contacts.contacts.length).to eq(2)
   end
+
 end
