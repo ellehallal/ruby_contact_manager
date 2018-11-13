@@ -2,11 +2,11 @@ class Person
 
   attr_reader :first_name, :last_name, :email_address, :phone_number
 
-  def initialize
-    @first_name = "first name"
-    @last_name = "last name"
-    @email_address = "email"
-    @phone_number = "phone"
+  def initialize(first_name="no value", last_name="no value", email="no value", phone="no value")
+    @first_name = first_name
+    @last_name = last_name
+    @email_address = email
+    @phone_number = phone
   end
 
   def get_display_person_details
