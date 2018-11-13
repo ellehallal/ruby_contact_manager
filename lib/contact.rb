@@ -37,4 +37,12 @@ class Contact
     end
   end
 
+  def search_first_name(search_term)
+    sort_by_first_name
+    @contacts.select do |entry|
+      entry[:first_name].start_with?(search_term)
+    end
+
+  end
+
 end

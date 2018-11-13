@@ -66,13 +66,13 @@ RSpec.describe Contact do
     expect(my_contacts.display_contacts).to eq([{:first_name=>"Amy", :last_name=>"Winchester", :email_address=>"amy@amy.com", :phone_number=>"07000000000"}, {:first_name=>"Deneice", :last_name=>"Daniels", :email_address=>"dee@hello.com", :phone_number=>"07889999999"}, {:first_name=>"Elle", :last_name=>"H", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}])
   end
 
-  xit "displays contacts with a last name beginning with H" do
-    allow($stdin).to receive(:gets).and_return("Elle", "H", "elle@hello.com", "07999999999", "Deneice", "Daniels", "dee@hello.com", "07889999999", "Jermaine", "Hull", "j@hull.com", "07000000000")
+  it "displays contacts with the first name beginning with E only, in alphabetical order" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Smith", "elle@hello.com", "07999999999", "Deneice", "Daniels", "dee@hello.com", "07889999999", "Edward", "Smith", "e@smith.com", "07000000000")
     my_contacts = Contact.new
     my_contacts.create_new_entry
     my_contacts.create_new_entry
     my_contacts.create_new_entry
-    expect(my_contacts.search).to eq([{:first_name=>"Amy", :last_name=>"Winchester", :email_address=>"amy@amy.com", :phone_number=>"07000000000"}, {:first_name=>"Deneice", :last_name=>"Daniels", :email_address=>"dee@hello.com", :phone_number=>"07889999999"}, {:first_name=>"Elle", :last_name=>"H", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}])
+    expect(my_contacts.search_first_name("E")).to eq([{:first_name=>"Edward", :last_name=>"Smith", :email_address=>"e@smith.com", :phone_number=>"07000000000"}, {:first_name=>"Elle", :last_name=>"Smith", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}])
   end
 
 end
