@@ -38,7 +38,7 @@ RSpec.describe Contact do
     my_contacts = Contact.new
     my_contacts.create_new_entry
     my_contacts.create_new_entry
-    expect(my_contacts.contacts).to eq([{:first_name=>"Elle", :last_name=>"H", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}, {:first_name=>"Deneice", :last_name=>"Daniels", :email_address=>"dee@hello.com", :phone_number=>"07889999999"}])
+    expect(my_contacts.contacts).to eq([{:first_name=>"Deneice", :last_name=>"Daniels", :email_address=>"dee@hello.com", :phone_number=>"07889999999"}, {:first_name=>"Elle", :last_name=>"H", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}])
   end
 
   it "sorts @contacts in alphabetical order by last name" do
