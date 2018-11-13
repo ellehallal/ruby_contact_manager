@@ -23,6 +23,12 @@ class Contact
       puts ""
     end
 
+    def sort_by_last_name
+      @contacts.sort_by do |entry|
+        entry[:last_name]
+      end
+    end
+
   end
 
 end
