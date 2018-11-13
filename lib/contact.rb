@@ -5,6 +5,59 @@ class Contact
 
   def initialize
     @contacts = []
+    self.begin
+  end
+
+  def begin
+    exit_contact_manager = "N"
+    puts "Welcome to Contact Manager"
+    while exit_contact_manager == "N"
+      puts "What would you like to do? Please select a number from 1 - 5:"
+      puts "1. Add a new contact"
+      puts "2. View all contacts"
+      puts "3. Search for a contact by first name"
+      puts "4. Search for a contact by last name"
+      puts "5. Exit Contact Manager"
+      print ">"
+      selection = $stdin.gets.chomp
+
+      case selection
+      when "1"
+        create_new_entry
+      when "2"
+        while @contacts.empty?
+          puts "You do not have any contacts. Would you like to add a new contact?"
+          puts "Y / N"
+          add_new_contact = $stdin.gets.chomp.upcase
+
+          if add_new_contact == "Y"
+            create_new_entry
+          elsif add_new_contact == "N"
+            break
+          else
+            puts "Sorry, that isn't a valid selection."
+          end
+        end
+
+        if @contacts.empty? == false
+          display_contacts
+        end
+
+      when "3"
+        puts "Please enter your search term:"
+        search_for = $stdin.gets.chomp
+        search_first_name(search_for)
+
+      when "4"
+        puts "Please enter your search term:"
+        search_for = $stdin.gets.chomp
+        search_last_name(search_for)
+
+      when "5"
+        exit_contact_manager = "Y"
+      end
+    end
+    puts "Thanks for using Contact Manager"
   end
 
   def create_new_entry
@@ -23,7 +76,9 @@ class Contact
 
     new_contact = Person.new(first, last, email, phone)
     @contacts.push(new_contact.create_person_hash)
+    sort_by_first_name
 
+    puts ""
     puts "Here's your new contact:"
     puts "First name: #{new_contact.first_name}"
     puts "Last name: #{new_contact.last_name}"
@@ -34,7 +89,6 @@ class Contact
   end
 
   def display_contacts
-    sort_by_first_name
     puts "Here are your contacts:"
     puts ""
     @contacts.each do |entry|
@@ -64,7 +118,7 @@ class Contact
       entry[:first_name].start_with?(search_term)
     end
 
-    puts "Contacts with first names starting with #{search_term}"
+    puts "Contacts with first names starting with #{search_term}:"
     puts ""
     search.each do |entry|
       entry.each do |key, value|
@@ -80,7 +134,8 @@ class Contact
       entry[:last_name].start_with?(search_term)
     end
 
-    puts "Last names which start with #{search_term}"
+    puts "Contacts with last names starting with #{search_term}:"
+    puts ""
     search.each do |entry|
       entry.each do |key, value|
         puts "#{key.to_s}: #{value}"
