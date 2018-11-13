@@ -29,6 +29,12 @@ class Contact
       end
     end
 
+    def sort_by_first_name
+      @contacts.sort_by do |entry|
+        entry[:first_name]
+      end
+    end
+
   end
 
 end

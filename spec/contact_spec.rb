@@ -49,12 +49,21 @@ RSpec.describe Contact do
     expect {my_contacts.display_contacts}.to output("Here are your contacts:\n\nfirst_name: Elle\nlast_name: H\nemail_address: elle@hello.com\nphone_number: 07999999999\n\nfirst_name: Deneice\nlast_name: Daniels\nemail_address: dee@hello.com\nphone_number: 07889999999\n\n").to_stdout
   end
 
-  it "sorts @contacts in alphabetical order by surname" do
+  it "sorts @contacts in alphabetical order by last name" do
     allow($stdin).to receive(:gets).and_return("Elle", "H", "elle@hello.com", "07999999999", "Deneice", "Daniels", "dee@hello.com", "07889999999")
     my_contacts = Contact.new
     my_contacts.create_new_entry
     my_contacts.create_new_entry
     expect(my_contacts.sort_by_last_name).to eq([{:first_name=>"Deneice", :last_name=>"Daniels", :email_address=>"dee@hello.com", :phone_number=>"07889999999"}, {:first_name=>"Elle", :last_name=>"H", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}])
+  end
+
+  it "sorts @contacts in alphabetical order by first name" do
+    allow($stdin).to receive(:gets).and_return("Elle", "H", "elle@hello.com", "07999999999", "Deneice", "Daniels", "dee@hello.com", "07889999999", "Amy", "Winchester", "amy@amy.com", "07000000000")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.create_new_entry
+    my_contacts.create_new_entry
+    expect(my_contacts.sort_by_first_name).to eq([{:first_name=>"Amy", :last_name=>"Winchester", :email_address=>"amy@amy.com", :phone_number=>"07000000000"}, {:first_name=>"Deneice", :last_name=>"Daniels", :email_address=>"dee@hello.com", :phone_number=>"07889999999"}, {:first_name=>"Elle", :last_name=>"H", :email_address=>"elle@hello.com", :phone_number=>"07999999999"}])
   end
 
 end
