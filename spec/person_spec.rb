@@ -56,11 +56,4 @@ RSpec.describe Person do
   end
 
 
-
-
-
-
-
-
-
 end

@@ -14,6 +14,7 @@ class Contact
   end
 
   def display_contacts
+    sort_by_first_name
     puts "Here are your contacts:"
     puts ""
     @contacts.each do |entry|
@@ -22,19 +23,18 @@ class Contact
       end
       puts ""
     end
+  end
 
-    def sort_by_last_name
-      @contacts.sort_by do |entry|
-        entry[:last_name]
-      end
+  def sort_by_last_name
+    @contacts.sort_by do |entry|
+      entry[:last_name]
     end
+  end
 
-    def sort_by_first_name
-      @contacts.sort_by do |entry|
-        entry[:first_name]
-      end
+  def sort_by_first_name
+    @contacts.sort_by! do |entry|
+      entry[:first_name]
     end
-
   end
 
 end
