@@ -19,17 +19,17 @@ class Person
 
   def get_first_name
     puts "Please enter the first name below:"
-    @first_name = $stdin.gets.chomp
+    @first_name = $stdin.gets.chomp.capitalize
   end
 
   def get_last_name
     puts "Please enter the last name below:"
-    @last_name = $stdin.gets.chomp
+    @last_name = $stdin.gets.chomp.capitalize
   end
 
   def get_email_address
     puts "Please enter the email address below:"
-    @email_address = $stdin.gets.chomp
+    @email_address = $stdin.gets.chomp.downcase
   end
 
   def get_phone_number
