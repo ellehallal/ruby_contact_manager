@@ -43,14 +43,46 @@ class Contact
         end
 
       when "3"
-        puts "Please enter your search term:"
-        search_for = $stdin.gets.chomp
-        search_first_name(search_for)
+        while @contacts.empty?
+          puts "You do not have any contacts. Would you like to add a new contact?"
+          puts "Y / N"
+          add_new_contact = $stdin.gets.chomp.upcase
+
+          if add_new_contact == "Y"
+            create_new_entry
+          elsif add_new_contact == "N"
+            break
+          else
+            puts "Sorry, that isn't a valid selection."
+          end
+        end
+
+        if @contacts.empty? == false
+          puts "Please enter your search term:"
+          search_for = $stdin.gets.chomp
+          search_first_name(search_for)
+        end
 
       when "4"
-        puts "Please enter your search term:"
-        search_for = $stdin.gets.chomp
-        search_last_name(search_for)
+        while @contacts.empty?
+          puts "You do not have any contacts. Would you like to add a new contact?"
+          puts "Y / N"
+          add_new_contact = $stdin.gets.chomp.upcase
+
+          if add_new_contact == "Y"
+            create_new_entry
+          elsif add_new_contact == "N"
+            break
+          else
+            puts "Sorry, that isn't a valid selection."
+          end
+        end
+
+        if @contacts.empty? == false
+          puts "Please enter your search term:"
+          search_for = $stdin.gets.chomp
+          search_last_name(search_for)
+        end
 
       when "5"
         exit_contact_manager = "Y"
