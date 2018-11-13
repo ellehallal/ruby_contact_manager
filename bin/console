@@ -6,8 +6,7 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'contact'
 
 my_contacts = Contact.new
-my_contacts.create_new_entry
-my_contacts.create_new_entry
+my_contacts.begin
 
 
 # Require files here to experiment with them in an irb session
