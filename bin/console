@@ -8,8 +8,7 @@ require 'contact'
 my_contacts = Contact.new
 my_contacts.create_new_entry
 my_contacts.create_new_entry
-# my_contacts.display_contacts
-p my_contacts.contacts
+my_contacts.display_contacts
 
 # Require files here to experiment with them in an irb session
 

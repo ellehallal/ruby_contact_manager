@@ -14,6 +14,8 @@ class Contact
   end
 
   def display_contacts
+    puts "Here are your contacts:"
+    puts ""
     @contacts.each do |entry|
       entry.each do |key, value|
         puts "#{key.to_s}: #{value}"
