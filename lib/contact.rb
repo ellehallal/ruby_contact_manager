@@ -8,7 +8,20 @@ class Contact
   end
 
   def create_new_entry
-    new_contact = Person.new
+    puts "Please enter the first name below:"
+    first_name = $stdin.gets.chomp.capitalize
+
+    puts "Please enter the last name below:"
+    last_name = $stdin.gets.chomp.capitalize
+
+    puts "Please enter the email address below:"
+    email_address = $stdin.gets.chomp.downcase
+
+    puts "Please enter the phone number below:"
+    phone_number = $stdin.gets.chomp
+
+
+    new_contact = Person.new(first_name, last_name, email_address, phone_number)
     new_contact.get_display_person_details
     @contacts.push(new_contact.create_person_hash)
   end
