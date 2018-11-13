@@ -8,7 +8,7 @@ require 'contact'
 my_contacts = Contact.new
 my_contacts.create_new_entry
 my_contacts.create_new_entry
-my_contacts.display_contacts
+my_contacts.search_first_name("E")
 
 # Require files here to experiment with them in an irb session
 
