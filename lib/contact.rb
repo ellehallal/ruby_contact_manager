@@ -97,8 +97,6 @@ class Contact
     puts "Thanks for using Contact Manager."
   end
 
-  # private
-
   def create_new_entry
     puts "Please enter the first name below:"
     first = $stdin.gets.chomp.capitalize
