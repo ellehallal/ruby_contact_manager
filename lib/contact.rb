@@ -1,5 +1,6 @@
 class Contact
   require 'person'
+  require 'json'
 
   attr_reader :contacts
 
@@ -111,6 +112,8 @@ class Contact
 
     new_contact = Person.new(first, last, email, phone)
     @contacts.push(new_contact.create_person_hash)
+    add_contact_to_file(first, last, email, phone)
+
 
     sort_by_first_name
 
@@ -172,6 +175,13 @@ class Contact
       end
       puts ""
     end
+  end
+
+  def add_contact_to_file(first_name, last_name, email_address, phone_number)
+    json_string = File.read('./lib/contacts.json')
+    current_contacts = JSON.load(json_string)
+    current_contacts << {"first_name": first_name, "last_name": last_name, "email_address": email_address, "phone_number": phone_number}
+    File.write('./lib/contacts.json', current_contacts.to_json)
   end
 
 end
