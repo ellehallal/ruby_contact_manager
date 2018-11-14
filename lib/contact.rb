@@ -2,7 +2,7 @@ class Contact
   require 'person'
   require 'json'
 
-  attr_reader :contacts, :current_contacts
+  attr_reader :contacts
 
   def initialize
     @contacts = []
@@ -113,11 +113,9 @@ class Contact
     puts "Please enter the phone number below (e.g. 07999000111):"
     phone = $stdin.gets.chomp.scan(/\d+/).join
 
-
-    # new_contact = Person.new(first, last, email, phone)
-    # @contacts.push(new_contact.create_person_hash)
     add_contact_to_file(first, last, email, phone)
     @contacts << {"first_name" => first, "last_name" => last, "email_address" => email, "phone_number" => phone}
+    sort_by_first_name
 
     puts ""
     puts "Here's your new contact:"
@@ -127,11 +125,9 @@ class Contact
     puts "Phone number: #{phone}"
     puts ""
 
-    p @contacts
   end
 
   def display_contacts
-    sort_by_first_name
     puts "Here are your contacts:"
     puts ""
 
@@ -141,23 +137,12 @@ class Contact
       end
       puts ""
     end
-
-    # @contacts.each do |entry|
-    #   entry.each do |key, value|
-    #     puts "#{key.to_s}: #{value}"
-    #   end
-    #   puts ""
-    # end
   end
 
   def sort_by_first_name
     @contacts.sort_by! do |entry|
       entry["first_name"]
     end
-    #
-    # @contacts.sort_by! do |entry|
-    #   entry[:first_name]
-    # end
   end
 
 
