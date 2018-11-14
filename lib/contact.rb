@@ -130,12 +130,22 @@ class Contact
   def display_contacts
     puts "Here are your contacts:"
     puts ""
-    @contacts.each do |entry|
+
+    current_contacts = get_contacts_from_file('./lib/contacts.json')
+
+    current_contacts.each do |entry|
       entry.each do |key, value|
         puts "#{key.to_s}: #{value}"
       end
       puts ""
     end
+
+    # @contacts.each do |entry|
+    #   entry.each do |key, value|
+    #     puts "#{key.to_s}: #{value}"
+    #   end
+    #   puts ""
+    # end
   end
 
   def sort_by_first_name
@@ -182,6 +192,12 @@ class Contact
     current_contacts = JSON.load(json_string)
     current_contacts << {"first_name": first_name, "last_name": last_name, "email_address": email_address, "phone_number": phone_number}
     File.write('./lib/contacts.json', current_contacts.to_json)
+  end
+
+  def get_contacts_from_file(filename)
+    file_to_parse = File.read(filename)
+    contacts_hash = JSON.parse(file_to_parse)
+    contacts_hash
   end
 
 end
