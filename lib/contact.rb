@@ -111,6 +111,7 @@ class Contact
 
     new_contact = Person.new(first, last, email, phone)
     @contacts.push(new_contact.create_person_hash)
+
     sort_by_first_name
 
     puts ""
