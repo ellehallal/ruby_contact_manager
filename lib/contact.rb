@@ -1,5 +1,4 @@
 class Contact
-  require 'person'
   require 'json'
 
   attr_reader :contacts
