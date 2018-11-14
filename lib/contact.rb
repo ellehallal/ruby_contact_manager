@@ -11,7 +11,7 @@ class Contact
     exit_contact_manager = "N"
     puts "Welcome to Contact Manager"
     while exit_contact_manager == "N"
-      puts "What would you like to do? Please select a number from 1 - 5:"
+      puts "Please select a number from 1 - 5:"
       puts "1. Add a new contact"
       puts "2. View all contacts"
       puts "3. Search for a contact by first name"
@@ -86,9 +86,11 @@ class Contact
 
       when "5"
         exit_contact_manager = "Y"
+      else
+        puts "Sorry, that is an invalid selection. Please try again."
       end
     end
-    puts "Thanks for using Contact Manager"
+    puts "Thanks for using Contact Manager."
   end
 
   # private
@@ -103,8 +105,8 @@ class Contact
     puts "Please enter the email address below:"
     email = $stdin.gets.chomp.downcase
 
-    puts "Please enter the phone number below:"
-    phone = $stdin.gets.chomp
+    puts "Please enter the phone number below (e.g. 07999000111):"
+    phone = $stdin.gets.chomp.scan(/\d+/).join
 
 
     new_contact = Person.new(first, last, email, phone)
@@ -132,7 +134,7 @@ class Contact
     end
   end
 
-  def sort_by_last_name
+  def sort_by_last_name #is this necessary?
     @contacts.sort_by do |entry|
       entry[:last_name]
     end
