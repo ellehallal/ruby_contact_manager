@@ -1,7 +1,7 @@
 class Contact
   require 'json'
 
-  attr_reader :contacts
+  attr_reader :contacts 
 
   def initialize
     @contacts = []
