@@ -2,11 +2,14 @@ class Contact
   require 'person'
   require 'json'
 
-  attr_reader :contacts
+  attr_reader :contacts, :current_contacts
 
   def initialize
     @contacts = []
     @current_contacts = self.get_contacts_from_file('./lib/contacts.json')
+    @current_contacts.each do |contact|
+      @contacts << contact
+    end
   end
 
   def begin
@@ -26,7 +29,7 @@ class Contact
       when "1"
         create_new_entry
       when "2"
-        while @current_contacts.empty?
+        while @contacts.empty?
           puts "You do not have any contacts. Would you like to add a new contact?"
           puts "Y / N"
           add_new_contact = $stdin.gets.chomp.upcase
@@ -40,13 +43,12 @@ class Contact
           end
         end
 
-        if @current_contacts.empty? == false
-          sort_by_first_name
+        if @contacts.empty? == false
           display_contacts
         end
 
       when "3"
-        while @current_contacts.empty?
+        while @contacts.empty?
           puts "You do not have any contacts. Would you like to add a new contact?"
           puts "Y / N"
           add_new_contact = $stdin.gets.chomp.upcase
@@ -60,14 +62,14 @@ class Contact
           end
         end
 
-        if @current_contacts.empty? == false
+        if @contacts.empty? == false
           puts "Please enter your search term:"
           search_for = $stdin.gets.chomp
           search_first_name(search_for)
         end
 
       when "4"
-        while @current_contacts.empty?
+        while @contacts.empty?
           puts "You do not have any contacts. Would you like to add a new contact?"
           puts "Y / N"
           add_new_contact = $stdin.gets.chomp.upcase
@@ -81,7 +83,7 @@ class Contact
           end
         end
 
-        if @current_contacts.empty? == false
+        if @contacts.empty? == false
           puts "Please enter your search term:"
           search_for = $stdin.gets.chomp
           search_last_name(search_for)
@@ -115,7 +117,7 @@ class Contact
     # new_contact = Person.new(first, last, email, phone)
     # @contacts.push(new_contact.create_person_hash)
     add_contact_to_file(first, last, email, phone)
-
+    @contacts << {"first_name": first, "last_name": last, "email_address": email, "phone_number": phone}
 
     sort_by_first_name
 
@@ -133,9 +135,7 @@ class Contact
     puts "Here are your contacts:"
     puts ""
 
-    current_contacts = get_contacts_from_file('./lib/contacts.json')
-
-    current_contacts.each do |entry|
+    @contacts.each do |entry|
       entry.each do |key, value|
         puts "#{key.to_s}: #{value}"
       end
@@ -151,10 +151,8 @@ class Contact
   end
 
   def sort_by_first_name
-    current_contacts = get_contacts_from_file('./lib/contacts.json')
-
-    current_contacts.sort_by! do |entry|
-      entry[:first_name]
+    @contacts.sort_by! do |contact|
+      contact[:first_name]
     end
     #
     # @contacts.sort_by! do |entry|
@@ -199,7 +197,7 @@ class Contact
   def add_contact_to_file(first_name, last_name, email_address, phone_number)
     json_string = File.read('./lib/contacts.json')
     current_contacts = JSON.load(json_string)
-    current_contacts << {"first_name": first_name, "last_name": last_name, "email_address": email_address, "phone_number": phone_number}
+    current_contacts << {first_name: first_name, last_name: last_name, email_address: email_address, phone_number: phone_number}
     File.write('./lib/contacts.json', current_contacts.to_json)
   end
 
