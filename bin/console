@@ -8,6 +8,7 @@ require 'contact'
 my_contacts = Contact.new
 my_contacts.begin
 # p my_contacts.contacts
+# p my_contacts.sort_by_first_name
 # p my_contacts.current_contacts
 # p my_contacts.sort_by_first_name
 # # p my_contacts.current_contacts
