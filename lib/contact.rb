@@ -1,10 +1,14 @@
 class Contact
-  require 'person'
+  require 'json'
 
-  attr_reader :contacts
+  attr_reader :contacts 
 
   def initialize
     @contacts = []
+    @current_contacts = self.get_contacts_from_file('./lib/contacts.json')
+    @current_contacts.each do |contact|
+      @contacts << contact
+    end
   end
 
   def begin
@@ -93,8 +97,6 @@ class Contact
     puts "Thanks for using Contact Manager."
   end
 
-  # private
-
   def create_new_entry
     puts "Please enter the first name below:"
     first = $stdin.gets.chomp.capitalize
@@ -108,17 +110,16 @@ class Contact
     puts "Please enter the phone number below (e.g. 07999000111):"
     phone = $stdin.gets.chomp.scan(/\d+/).join
 
-
-    new_contact = Person.new(first, last, email, phone)
-    @contacts.push(new_contact.create_person_hash)
+    add_contact_to_file(first, last, email, phone)
+    @contacts << {"first_name" => first, "last_name" => last, "email_address" => email, "phone_number" => phone}
     sort_by_first_name
 
     puts ""
     puts "Here's your new contact:"
-    puts "First name: #{new_contact.first_name}"
-    puts "Last name: #{new_contact.last_name}"
-    puts "Email address: #{new_contact.email_address}"
-    puts "Phone number: #{new_contact.phone_number}"
+    puts "First name: #{first}"
+    puts "Last name: #{last}"
+    puts "Email address: #{email}"
+    puts "Phone number: #{phone}"
     puts ""
 
   end
@@ -126,6 +127,7 @@ class Contact
   def display_contacts
     puts "Here are your contacts:"
     puts ""
+
     @contacts.each do |entry|
       entry.each do |key, value|
         puts "#{key.to_s}: #{value}"
@@ -134,15 +136,9 @@ class Contact
     end
   end
 
-  def sort_by_last_name #is this necessary?
-    @contacts.sort_by do |entry|
-      entry[:last_name]
-    end
-  end
-
   def sort_by_first_name
     @contacts.sort_by! do |entry|
-      entry[:first_name]
+      entry["first_name"]
     end
   end
 
@@ -150,7 +146,7 @@ class Contact
   def search_first_name(search_term)
     sort_by_first_name
     search = @contacts.select do |entry|
-      entry[:first_name].start_with?(search_term.capitalize)
+      entry["first_name"].start_with?(search_term.capitalize)
     end
 
     puts "Contacts with first names starting with #{search_term.capitalize}:"
@@ -166,7 +162,7 @@ class Contact
   def search_last_name(search_term)
     sort_by_first_name
     search = @contacts.select do |entry|
-      entry[:last_name].start_with?(search_term.capitalize)
+      entry["last_name"].start_with?(search_term.capitalize)
     end
 
     puts "Contacts with last names starting with #{search_term.capitalize}:"
@@ -177,6 +173,20 @@ class Contact
       end
       puts ""
     end
+  end
+
+
+  def add_contact_to_file(first_name, last_name, email_address, phone_number)
+    json_string = File.read('./lib/contacts.json')
+    current_contacts = JSON.load(json_string)
+    current_contacts << {first_name: first_name, last_name: last_name, email_address: email_address, phone_number: phone_number}
+    File.write('./lib/contacts.json', current_contacts.to_json)
+  end
+
+  def get_contacts_from_file(filename)
+    file_to_parse = File.read(filename)
+    contacts_hash = JSON.parse(file_to_parse)
+    contacts_hash
   end
 
 end

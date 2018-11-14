@@ -11,10 +11,10 @@ class Person
 
   def create_person_hash
     {
-      :first_name => @first_name,
-      :last_name => @last_name,
-      :email_address => @email_address,
-      :phone_number => @phone_number
+      "first_name": @first_name,
+      "last_name": @last_name,
+      "email_address": @email_address,
+      "phone_number": @phone_number
     }
   end
 

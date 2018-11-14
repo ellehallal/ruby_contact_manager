@@ -10,5 +10,5 @@ Create a command line program to store, search and view your contacts
 
 ## Stretch Goals
 
-- Save the contacts to a file
-- Load the contacts from that file when restarting the program
+- [x] Save the contacts to a file
+- [x] Load the contacts from that file when restarting the program
