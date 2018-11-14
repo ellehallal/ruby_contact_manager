@@ -135,12 +135,6 @@ class Contact
     end
   end
 
-  def sort_by_last_name #is this necessary?
-    @contacts.sort_by do |entry|
-      entry[:last_name]
-    end
-  end
-
   def sort_by_first_name
     @contacts.sort_by! do |entry|
       entry[:first_name]
