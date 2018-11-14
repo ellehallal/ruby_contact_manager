@@ -119,13 +119,13 @@ class Contact
 
     sort_by_first_name
 
-    puts ""
-    puts "Here's your new contact:"
-    puts "First name: #{new_contact.first_name}"
-    puts "Last name: #{new_contact.last_name}"
-    puts "Email address: #{new_contact.email_address}"
-    puts "Phone number: #{new_contact.phone_number}"
-    puts ""
+    # puts ""
+    # puts "Here's your new contact:"
+    # puts "First name: #{new_contact.first_name}"
+    # puts "Last name: #{new_contact.last_name}"
+    # puts "Email address: #{new_contact.email_address}"
+    # puts "Phone number: #{new_contact.phone_number}"
+    # puts ""
 
   end
 
@@ -194,6 +194,7 @@ class Contact
       puts ""
     end
   end
+
 
   def add_contact_to_file(first_name, last_name, email_address, phone_number)
     json_string = File.read('./lib/contacts.json')
