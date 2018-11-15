@@ -88,10 +88,10 @@ class Contact
     end
   end
 
-  def search_email(search_term)
+  def search_phone(search_term)
     sort_by_first_name
     search = @contacts.select do |entry|
-      entry["email_address"].start_with?(search_term.downcase)
+      entry["phone_number"].start_with?(search_term.downcase)
     end
 
     puts "Contacts with email addresses starting with #{search_term.downcase}:"

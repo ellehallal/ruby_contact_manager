@@ -55,13 +55,22 @@ RSpec.describe Contact do
     expect(my_contacts.search_last_name("Sm")).to eq([{"first_name" => "Deneice", "last_name" => "Smith", "email_address" => "dee@hello.com", "phone_number" => "07889999999"}, {"first_name" => "Edward", "last_name" => "Smith", "email_address" => "e@smith.com", "phone_number" => "07000000000"}])
   end
 
-  it "displays contacts with the email address beginning with 'E' only" do
+  xit "displays contacts with the email address beginning with 'E' only" do
     allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "Deneice", "Smith", "dee@hello.com", "07889999999", "Edward", "Smith", "e@smith.com", "07000000000")
     my_contacts = Contact.new
     my_contacts.create_new_entry
     my_contacts.create_new_entry
     my_contacts.create_new_entry
     expect(my_contacts.search_email("E")).to eq([{"first_name" => "Edward", "last_name" => "Smith", "email_address" => "e@smith.com", "phone_number" => "07000000000"}, {"first_name" => "Elle", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
+  end
+
+  it "displays contacts with the phone number beginning with '079' only" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "Deneice", "Smith", "dee@hello.com", "07989999999", "Edward", "Smith", "e@smith.com", "07000000000")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.create_new_entry
+    my_contacts.create_new_entry
+    expect(my_contacts.search_phone("079")).to eq([{"first_name" => "Deneice", "last_name" => "Smith", "email_address" => "dee@hello.com", "phone_number" => "07989999999"}, {"first_name" => "Elle", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
   end
 
 end
