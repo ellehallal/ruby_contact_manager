@@ -13,6 +13,7 @@ class Contact
   def begin
     exit_contact_manager = "N"
     puts "Welcome to Contact Manager"
+
     while exit_contact_manager == "N"
       puts "Please select a number from 1 - 5:"
       puts "1. Add a new contact"
@@ -89,6 +90,7 @@ class Contact
 
       when "5"
         exit_contact_manager = "Y"
+        
       else
         puts "Sorry, that is an invalid selection. Please try again."
       end
