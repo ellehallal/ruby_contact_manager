@@ -3,10 +3,9 @@
 # Allows you to require any file in lib
 $: << File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'contact'
+require 'contact_manager'
 
-my_contacts = Contact.new
-my_contacts.begin
+my_contacts = ContactManager.new
 
 
 # Require files here to experiment with them in an irb session
