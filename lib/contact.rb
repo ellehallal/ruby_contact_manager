@@ -88,13 +88,29 @@ class Contact
     end
   end
 
+  def search_email(search_term)
+    sort_by_first_name
+    search = @contacts.select do |entry|
+      entry["email_address"].start_with?(search_term.downcase)
+    end
+
+    puts "Contacts with an email address starting with #{search_term.downcase}:"
+    puts ""
+    search.each do |entry|
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+  end
+
   def search_phone(search_term)
     sort_by_first_name
     search = @contacts.select do |entry|
       entry["phone_number"].start_with?(search_term.downcase)
     end
 
-    puts "Contacts with email addresses starting with #{search_term.downcase}:"
+    puts "Contacts with a phone number starting with #{search_term}:"
     puts ""
     search.each do |entry|
       entry.each do |key, value|
