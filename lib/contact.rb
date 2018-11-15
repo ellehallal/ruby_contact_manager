@@ -1,12 +1,11 @@
 class Contact
   require 'json'
 
-  attr_reader :contacts 
+  attr_reader :contacts
 
   def initialize
     @contacts = []
-    @current_contacts = self.get_contacts_from_file('./lib/contacts.json')
-    @current_contacts.each do |contact|
+    self.get_contacts_from_file('./lib/contacts.json').each do |contact|
       @contacts << contact
     end
   end
