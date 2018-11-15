@@ -88,6 +88,22 @@ class Contact
     end
   end
 
+  def search_email(search_term)
+    sort_by_first_name
+    search = @contacts.select do |entry|
+      entry["email_address"].start_with?(search_term.downcase)
+    end
+
+    puts "Contacts with email addresses starting with #{search_term.downcase}:"
+    puts ""
+    search.each do |entry|
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+  end
+
 
   def add_contact_to_file(first_name, last_name, email_address, phone_number)
     json_string = File.read('./lib/contacts.json')
