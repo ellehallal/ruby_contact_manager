@@ -120,6 +120,34 @@ class Contact
     end
   end
 
+  def delete_contact
+    puts "Please select which contact you wish to delete (select a number)"
+    puts ""
+    @contacts.each_with_index do |entry, index|
+      puts "#{index + 1}:"
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+
+    selection = $stdin.gets.chomp.to_i
+    index_to_delete = selection -= 1
+
+    deleted_contact = []
+    deleted_contact << @contacts[index_to_delete]
+    @contacts.delete_at(index_to_delete)
+
+    deleted_contact.each do |entry|
+      puts "The following contact has been deleted:"
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+
+  end
+
 
   def add_contact_to_file(first_name, last_name, email_address, phone_number)
     json_string = File.read('./lib/contacts.json')
