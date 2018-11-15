@@ -5,7 +5,6 @@ class ContactManager
 
   def initialize
     @contact = Contact.new
-    self.begin
   end
 
   def begin
@@ -41,6 +40,7 @@ class ContactManager
         end
 
         if @contact.contacts.empty? == false
+          p @contact.contacts
           @contact.display_contacts
         end
 

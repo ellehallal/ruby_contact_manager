@@ -6,6 +6,7 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'contact_manager'
 
 my_contacts = ContactManager.new
+my_contacts.begin
 
 
 # Require files here to experiment with them in an irb session
