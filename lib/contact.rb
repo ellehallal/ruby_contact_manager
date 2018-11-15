@@ -132,8 +132,13 @@ class Contact
     puts "Please select which contact you wish to delete (select a number)"
 
     selection = $stdin.gets.chomp.to_i
-    index_to_delete = selection -= 1
 
+    while (1..@contacts.length).to_a.include?(selection) == false
+      puts "You've entered an invalid selection. Please try again:"
+      selection = $stdin.gets.chomp.to_i
+    end
+
+    index_to_delete = selection -= 1
     deleted_contact = []
     deleted_contact << @contacts[index_to_delete]
     @contacts.delete_at(index_to_delete)
