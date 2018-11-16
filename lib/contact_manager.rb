@@ -87,6 +87,10 @@ class ContactManager
             search_for = $stdin.gets.chomp
             @contact.search_phone(search_for)
 
+          when "5"
+            puts "Sorry, that's an invalid selection. Please try again:"
+            selection = $stdin.gets.chomp
+
           end
         end
 
