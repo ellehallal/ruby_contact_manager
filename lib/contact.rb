@@ -88,6 +88,70 @@ class Contact
     end
   end
 
+  def search_email(search_term)
+    sort_by_first_name
+    search = @contacts.select do |entry|
+      entry["email_address"].start_with?(search_term.downcase)
+    end
+
+    puts "Contacts with an email address starting with #{search_term.downcase}:"
+    puts ""
+    search.each do |entry|
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+  end
+
+  def search_phone(search_term)
+    sort_by_first_name
+    search = @contacts.select do |entry|
+      entry["phone_number"].start_with?(search_term.downcase)
+    end
+
+    puts "Contacts with a phone number starting with #{search_term}:"
+    puts ""
+    search.each do |entry|
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+  end
+
+  def delete_contact
+    puts ""
+    @contacts.each_with_index do |entry, index|
+      puts "#{index + 1}:"
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+    puts "Please select which contact you wish to delete (select a number)"
+
+    selection = get_selection
+
+    index_to_delete = selection -= 1
+    deleted_contact = []
+    deleted_contact << @contacts[index_to_delete]
+    @contacts.delete_at(index_to_delete)
+
+    File.open("./lib/contacts.json","w") do |file|
+      file.write @contacts.to_json
+    end
+
+    deleted_contact.each do |entry|
+      puts "The following contact has been deleted:"
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}"
+      end
+      puts ""
+    end
+
+  end
+
 
   def add_contact_to_file(first_name, last_name, email_address, phone_number)
     json_string = File.read('./lib/contacts.json')
@@ -100,6 +164,17 @@ class Contact
     file_to_parse = File.read(filename)
     contacts_hash = JSON.parse(file_to_parse)
     contacts_hash
+  end
+
+  private
+
+  def get_selection
+    selection = $stdin.gets.chomp.to_i
+    while (1..@contacts.length).to_a.include?(selection) == false
+      puts "You've entered an invalid selection. Please try again:"
+      selection = $stdin.gets.chomp.to_i
+    end
+    selection
   end
 
 end

@@ -15,8 +15,8 @@ class ContactManager
       puts "Please select a number from 1 - 5:"
       puts "1. Add a new contact"
       puts "2. View all contacts"
-      puts "3. Search for a contact by first name"
-      puts "4. Search for a contact by last name"
+      puts "3. Search for a contact"
+      puts "4. Delete a contact"
       puts "5. Exit Contact Manager"
       print ">"
       selection = $stdin.gets.chomp
@@ -59,9 +59,35 @@ class ContactManager
         end
 
         if @contact.contacts.empty? == false
-          puts "Please enter your search term:"
-          search_for = $stdin.gets.chomp
-          @contact.search_first_name(search_for)
+          puts "Search by:"
+          puts "1. First name"
+          puts "2. Last name"
+          puts "3. Email address"
+          puts "4. Phone number"
+
+          selection = $stdin.gets.chomp
+
+          case selection
+          when "1"
+            puts "Please enter your search term:"
+            search_for = $stdin.gets.chomp
+            @contact.search_first_name(search_for)
+          when "2"
+            puts "Please enter your search term:"
+            search_for = $stdin.gets.chomp
+            @contact.search_last_name(search_for)
+
+          when "3"
+            puts "Please enter your search term:"
+            search_for = $stdin.gets.chomp
+            @contact.search_email(search_for)
+
+          when "4"
+            puts "Please enter your search term:"
+            search_for = $stdin.gets.chomp
+            @contact.search_phone(search_for)
+
+          end
         end
 
       when "4"
@@ -80,9 +106,7 @@ class ContactManager
         end
 
         if @contact.contacts.empty? == false
-          puts "Please enter your search term:"
-          search_for = $stdin.gets.chomp
-          @contact.search_last_name(search_for)
+          @contact.delete_contact
         end
 
       when "5"
