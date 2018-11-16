@@ -55,6 +55,12 @@ class Contact
     end
   end
 
+  def sort_by(key)
+    @contacts.sort_by! do |entry|
+      entry[key]
+    end
+  end
+
 
   def search_first_name(search_term)
     sort_by_first_name
