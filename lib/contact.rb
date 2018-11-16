@@ -131,12 +131,7 @@ class Contact
     end
     puts "Please select which contact you wish to delete (select a number)"
 
-    selection = $stdin.gets.chomp.to_i
-
-    while (1..@contacts.length).to_a.include?(selection) == false
-      puts "You've entered an invalid selection. Please try again:"
-      selection = $stdin.gets.chomp.to_i
-    end
+    selection = get_selection
 
     index_to_delete = selection -= 1
     deleted_contact = []
@@ -169,6 +164,17 @@ class Contact
     file_to_parse = File.read(filename)
     contacts_hash = JSON.parse(file_to_parse)
     contacts_hash
+  end
+
+  private
+
+  def get_selection
+    selection = $stdin.gets.chomp.to_i
+    while (1..@contacts.length).to_a.include?(selection) == false
+      puts "You've entered an invalid selection. Please try again:"
+      selection = $stdin.gets.chomp.to_i
+    end
+    selection
   end
 
 end
