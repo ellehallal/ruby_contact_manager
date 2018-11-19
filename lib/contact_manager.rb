@@ -102,9 +102,23 @@ class ContactManager
       when "5"
         empty_contacts
 
-        if @contact.contacts.empty? == false
+        if contact.contacts.length == 1
+          puts "You only have one contact. Would you like to delete it? Y/N"
+          delete_selection = $stdin.gets.chomp.upcase
+
+          if delete_selection == "Y"
+            @contact.delete_contact
+          end
+        else
           @contact.delete_contact
         end
+
+        # if @contact.contacts.empty? == false
+        #   if contact.contacts == 1
+        #     puts "You only  have one contact. Would you like to delete"
+        #   end
+        #
+        # end
 
       when "6"
         exit_contact_manager = "Y"
