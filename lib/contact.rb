@@ -181,10 +181,6 @@ class Contact
 
     edited_contact = []
 
-    # if @contacts.length == 1
-    #   deleted_contact << @contacts[0]
-    #   @contacts.delete_at(0)
-    # else
       puts "Please select which contact you wish to edit (select a number)"
 
       selection = get_selection
@@ -199,36 +195,33 @@ class Contact
 
       edit_selection = $stdin.gets.chomp
 
-      case edit_selection
-      when "1"
-        puts "Please enter the new first name:"
-        new_detail = $stdin.gets.chomp
-        @contacts[index_to_edit]["first_name"] = new_detail
+    case edit_selection
+    when "1"
+      puts "Please enter the new first name:"
+      new_detail = $stdin.gets.chomp
+      @contacts[index_to_edit]["first_name"] = new_detail
 
-      when "2"
-        puts "Please enter the new last name:"
-        new_detail = $stdin.gets.chomp
-        @contacts[index_to_edit]["last_name"] = new_detail
+    when "2"
+      puts "Please enter the new last name:"
+      new_detail = $stdin.gets.chomp
+      @contacts[index_to_edit]["last_name"] = new_detail
 
-      when "3"
-        puts "Please enter the new email address:"
-        new_detail = $stdin.gets.chomp
-        @contacts[index_to_edit]["email_address"] = new_detail
+    when "3"
+      puts "Please enter the new email address:"
+      new_detail = $stdin.gets.chomp
+      @contacts[index_to_edit]["email_address"] = new_detail
 
-      when "4"
-        puts "Please enter the new phone number:"
-        new_detail = $stdin.gets.chomp
-        @contacts[index_to_edit]["phone_number"] = new_detail
+    when "4"
+      puts "Please enter the new phone number:"
+      new_detail = $stdin.gets.chomp
+      @contacts[index_to_edit]["phone_number"] = new_detail
 
-      else
-        puts "Sorry, that isn't a valid selection. Please try again."
-      end
+    else
+      puts "Sorry, that isn't a valid selection. Please try again."
+    end
 
-      edited_contact << @contacts[index_to_edit]
+    edited_contact << @contacts[index_to_edit]
 
-
-
-    # end
 
     File.open("./lib/contacts.json","w") do |file|
       file.write @contacts.to_json
