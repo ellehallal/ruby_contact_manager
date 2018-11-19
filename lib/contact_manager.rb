@@ -9,6 +9,8 @@ class ContactManager
 
   def begin
     exit_contact_manager = "N"
+    clear_screen
+    puts ""
     puts "Welcome to Contact Manager"
 
     while exit_contact_manager == "N"
@@ -132,4 +134,8 @@ def empty_contacts
       puts "Sorry, that isn't a valid selection."
     end
   end
+end
+
+def clear_screen
+  print "\e[2J\e[f"
 end

@@ -28,6 +28,8 @@ class Contact
     @contacts << {"first_name" => first, "last_name" => last, "email_address" => email, "phone_number" => phone}
     sort_by_key("first_name")
 
+    clear_screen
+
     puts ""
     puts "Here's your new contact:"
     puts "First name: #{first}".colorize(:green)
@@ -39,6 +41,7 @@ class Contact
   end
 
   def display_contacts
+    clear_screen
     puts "Here are your contacts:"
     puts ""
 
@@ -63,6 +66,8 @@ class Contact
       entry["first_name"].start_with?(search_term.capitalize)
     end
 
+    clear_screen
+
     puts "Contacts with first names starting with #{search_term.capitalize}:"
     puts ""
     search.each do |entry|
@@ -77,6 +82,8 @@ class Contact
     search = @contacts.select do |entry|
       entry["last_name"].start_with?(search_term.capitalize)
     end
+
+    clear_screen
 
     puts "Contacts with last names starting with #{search_term.capitalize}:"
     puts ""
@@ -93,6 +100,8 @@ class Contact
       entry["email_address"].start_with?(search_term.downcase)
     end
 
+    clear_screen
+
     puts "Contacts with an email address starting with #{search_term.downcase}:"
     puts ""
     search.each do |entry|
@@ -107,6 +116,8 @@ class Contact
     search = @contacts.select do |entry|
       entry["phone_number"].start_with?(search_term.downcase)
     end
+
+    clear_screen
 
     puts "Contacts with a phone number starting with #{search_term}:"
     puts ""
@@ -140,11 +151,13 @@ class Contact
       file.write @contacts.to_json
     end
 
+    clear_screen
+    puts ""
     deleted_contact.each do |entry|
-      puts "The following contact has been deleted:"
       entry.each do |key, value|
         puts "#{key.to_s}: #{value}".colorize(:red)
       end
+      puts "The contact above has been deleted"
       puts ""
     end
 
@@ -175,8 +188,8 @@ class Contact
     selection
   end
 
-  # def clear_screen
-  #   print "\e[2J\e[f"
-  # end
+  def clear_screen
+    print "\e[2J\e[f"
+  end
 
 end
