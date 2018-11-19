@@ -9,6 +9,8 @@ class ContactManager
 
   def begin
     exit_contact_manager = "N"
+    clear_screen
+    puts ""
     puts "Welcome to Contact Manager"
 
     while exit_contact_manager == "N"
@@ -17,8 +19,9 @@ class ContactManager
       puts "2. View all contacts"
       puts "3. Sort by..."
       puts "4. Search for a contact"
-      puts "5. Delete a contact"
-      puts "6. Exit Contact Manager"
+      puts "5. Edit a contact"
+      puts "6. Delete a contact"
+      puts "7. Exit Contact Manager"
       print ">"
       selection = $stdin.gets.chomp
 
@@ -26,38 +29,14 @@ class ContactManager
       when "1"
         @contact.create_new_entry
       when "2"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           @contact.display_contacts
         end
 
       when "3"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           puts "Sort by:"
@@ -85,19 +64,7 @@ class ContactManager
 
 
       when "4"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           puts "Search by:"
@@ -134,25 +101,24 @@ class ContactManager
         end
 
       when "5"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
+        empty_contacts
+        @contact.edit_contact
 
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
+      when "6"
+        empty_contacts
+
+        if contact.contacts.length == 1
+          puts "You only have one contact. Would you like to delete it? Y/N"
+          delete_selection = $stdin.gets.chomp.upcase
+
+          if delete_selection == "Y"
+            @contact.delete_contact
           end
-        end
-
-        if @contact.contacts.empty? == false
+        else
           @contact.delete_contact
         end
 
-      when "6"
+      when "7"
         exit_contact_manager = "Y"
 
       else
@@ -161,4 +127,27 @@ class ContactManager
     end
     puts "Thanks for using Contact Manager."
   end
+end
+
+
+private
+
+def empty_contacts
+  while @contact.contacts.empty?
+    puts "You do not have any contacts. Would you like to add a new contact?"
+    puts "Y / N"
+    add_new_contact = $stdin.gets.chomp.upcase
+
+    if add_new_contact == "Y"
+      @contact.create_new_entry
+    elsif add_new_contact == "N"
+      break
+    else
+      puts "Sorry, that isn't a valid selection."
+    end
+  end
+end
+
+def clear_screen
+  print "\e[2J\e[f"
 end

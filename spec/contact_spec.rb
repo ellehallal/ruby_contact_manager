@@ -18,6 +18,7 @@ RSpec.describe Contact do
 
   it "create_new_entry method accepts input, creates new instance of Person and adds to @contacts" do
     allow($stdin).to receive(:gets).and_return("Elle", "H", "elle@hello.com", "07999999999")
+    allow('./lib/contacts.json').to receive(:write).with( {"first_name" => "Elle", "last_name" => "H", "email_address" => "elle@hello.com", "phone_number" => "07999999999"})
     contacts = Contact.new
     contacts.create_new_entry
     expect(contacts.contacts).to eq([{"first_name" => "Elle", "last_name" => "H", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
@@ -75,7 +76,7 @@ RSpec.describe Contact do
   end
 end
 
-RSpec.describe Contact do 
+RSpec.describe Contact do
   it "displays contacts with the phone number beginning with '079' only" do
     allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "Deneice", "Smith", "dee@hello.com", "07989999999", "Edward", "Smith", "e@smith.com", "07000000000")
     my_contacts = Contact.new
@@ -83,6 +84,38 @@ RSpec.describe Contact do
     my_contacts.create_new_entry
     my_contacts.create_new_entry
     expect(my_contacts.search_phone("079")).to eq([{"first_name" => "Deneice", "last_name" => "Smith", "email_address" => "dee@hello.com", "phone_number" => "07989999999"}, {"first_name" => "Elle", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
+  end
+
+  it "creates a contact and then edits the first name to 'Eleanor'" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "1", "1", "Eleanor")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.edit_contact
+    expect(my_contacts.contacts).to eq([{"first_name" => "Eleanor", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
+  end
+
+  it "creates a contact and then edits the last name to 'Hall'" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "1", "2", "Hall")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.edit_contact
+    expect(my_contacts.contacts).to eq([{"first_name" => "Elle", "last_name" => "Hall", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
+  end
+
+  it "creates a contact and then edits the email address to 'elle@dorie.com'" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "1", "3", "elle@dorie.com")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.edit_contact
+    expect(my_contacts.contacts).to eq([{"first_name" => "Elle", "last_name" => "Dorie", "email_address" => "elle@dorie.com", "phone_number" => "07999999999"}])
+  end
+
+  it "creates a contact and then edits the phone number to '07888999000'" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "1", "4", "07888999000")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.edit_contact
+    expect(my_contacts.contacts).to eq([{"first_name" => "Elle", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07888999000"}])
   end
 
 end
