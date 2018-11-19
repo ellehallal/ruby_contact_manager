@@ -18,6 +18,7 @@ RSpec.describe Contact do
 
   it "create_new_entry method accepts input, creates new instance of Person and adds to @contacts" do
     allow($stdin).to receive(:gets).and_return("Elle", "H", "elle@hello.com", "07999999999")
+    allow('./lib/contacts.json').to receive(:write).with( {"first_name" => "Elle", "last_name" => "H", "email_address" => "elle@hello.com", "phone_number" => "07999999999"})
     contacts = Contact.new
     contacts.create_new_entry
     expect(contacts.contacts).to eq([{"first_name" => "Elle", "last_name" => "H", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
@@ -75,7 +76,7 @@ RSpec.describe Contact do
   end
 end
 
-RSpec.describe Contact do 
+RSpec.describe Contact do
   it "displays contacts with the phone number beginning with '079' only" do
     allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "Deneice", "Smith", "dee@hello.com", "07989999999", "Edward", "Smith", "e@smith.com", "07000000000")
     my_contacts = Contact.new
