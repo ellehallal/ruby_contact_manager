@@ -86,4 +86,11 @@ RSpec.describe Contact do
     expect(my_contacts.search_phone("079")).to eq([{"first_name" => "Deneice", "last_name" => "Smith", "email_address" => "dee@hello.com", "phone_number" => "07989999999"}, {"first_name" => "Elle", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
   end
 
+  it "creates a contact and then edits the first name to 'Eleanor'" do
+    allow($stdin).to receive(:gets).and_return("Elle", "Dorie", "elle@hello.com", "07999999999", "1", "1", "Eleanor")
+    my_contacts = Contact.new
+    my_contacts.create_new_entry
+    my_contacts.edit_contact
+    expect(my_contacts.contacts).to eq([{"first_name" => "Eleanor", "last_name" => "Dorie", "email_address" => "elle@hello.com", "phone_number" => "07999999999"}])
+  end
 end
