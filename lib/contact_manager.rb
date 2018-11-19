@@ -19,8 +19,9 @@ class ContactManager
       puts "2. View all contacts"
       puts "3. Sort by..."
       puts "4. Search for a contact"
-      puts "5. Delete a contact"
-      puts "6. Exit Contact Manager"
+      puts "5. Edit a contact"
+      puts "6. Delete a contact"
+      puts "7. Exit Contact Manager"
       print ">"
       selection = $stdin.gets.chomp
 
@@ -101,6 +102,10 @@ class ContactManager
 
       when "5"
         empty_contacts
+        @contact.edit_contact
+
+      when "6"
+        empty_contacts
 
         if contact.contacts.length == 1
           puts "You only have one contact. Would you like to delete it? Y/N"
@@ -113,7 +118,7 @@ class ContactManager
           @contact.delete_contact
         end
 
-      when "6"
+      when "7"
         exit_contact_manager = "Y"
 
       else

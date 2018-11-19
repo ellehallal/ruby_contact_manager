@@ -154,7 +154,6 @@ class Contact
       @contacts.delete_at(index_to_delete)
     end
 
-
     File.open("./lib/contacts.json","w") do |file|
       file.write @contacts.to_json
     end
@@ -168,9 +167,84 @@ class Contact
       puts "The contact above has been deleted"
       puts ""
     end
-
   end
 
+  def edit_contact
+    puts ""
+    @contacts.each_with_index do |entry, index|
+      puts "#{index + 1}:"
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}".colorize(:magenta)
+      end
+      puts ""
+    end
+
+    edited_contact = []
+
+    # if @contacts.length == 1
+    #   deleted_contact << @contacts[0]
+    #   @contacts.delete_at(0)
+    # else
+      puts "Please select which contact you wish to edit (select a number)"
+
+      selection = get_selection
+
+      index_to_edit = selection -= 1
+      puts ""
+      puts "What detail would you like to edit? (Select 1 - 4)"
+      puts "1. First name"
+      puts "2. Last name"
+      puts "3. Email address"
+      puts "4. Phone number"
+
+      edit_selection = $stdin.gets.chomp
+
+      case edit_selection
+      when "1"
+        puts "Please enter the new first name:"
+        new_detail = $stdin.gets.chomp
+        @contacts[index_to_edit]["first_name"] = new_detail
+
+      when "2"
+        puts "Please enter the new last name:"
+        new_detail = $stdin.gets.chomp
+        @contacts[index_to_edit]["last_name"] = new_detail
+
+      when "3"
+        puts "Please enter the new email address:"
+        new_detail = $stdin.gets.chomp
+        @contacts[index_to_edit]["email_address"] = new_detail
+
+      when "4"
+        puts "Please enter the new phone number:"
+        new_detail = $stdin.gets.chomp
+        @contacts[index_to_edit]["phone_number"] = new_detail
+
+      else
+        puts "Sorry, that isn't a valid selection. Please try again."
+      end
+
+      edited_contact << @contacts[index_to_edit]
+
+
+
+    # end
+
+    File.open("./lib/contacts.json","w") do |file|
+      file.write @contacts.to_json
+    end
+
+    clear_screen
+    puts ""
+    edited_contact.each do |entry|
+      entry.each do |key, value|
+        puts "#{key.to_s}: #{value}".colorize(:red)
+      end
+      puts "The contact above has been edited"
+      puts ""
+    end
+
+  end
 
   def add_contact_to_file(first_name, last_name, email_address, phone_number)
     json_string = File.read('./lib/contacts.json')
