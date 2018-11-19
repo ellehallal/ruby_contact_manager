@@ -113,13 +113,6 @@ class ContactManager
           @contact.delete_contact
         end
 
-        # if @contact.contacts.empty? == false
-        #   if contact.contacts == 1
-        #     puts "You only  have one contact. Would you like to delete"
-        #   end
-        #
-        # end
-
       when "6"
         exit_contact_manager = "Y"
 

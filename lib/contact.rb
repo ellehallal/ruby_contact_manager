@@ -138,14 +138,22 @@ class Contact
       end
       puts ""
     end
-    puts "Please select which contact you wish to delete (select a number)"
 
-    selection = get_selection
-
-    index_to_delete = selection -= 1
     deleted_contact = []
-    deleted_contact << @contacts[index_to_delete]
-    @contacts.delete_at(index_to_delete)
+
+    if @contacts.length == 1
+      deleted_contact << @contacts[0]
+      @contacts.delete_at(0)
+    else
+      puts "Please select which contact you wish to delete (select a number)"
+
+      selection = get_selection
+
+      index_to_delete = selection -= 1
+      deleted_contact << @contacts[index_to_delete]
+      @contacts.delete_at(index_to_delete)
+    end
+
 
     File.open("./lib/contacts.json","w") do |file|
       file.write @contacts.to_json
