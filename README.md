@@ -17,3 +17,4 @@ Create a command line program to store, search and view your contacts
 
 - [x] User can delete a contact
 - [x] User can search for a contact by email address and phone number
+- [x] Display output in different colours

@@ -175,4 +175,8 @@ class Contact
     selection
   end
 
+  # def clear_screen
+  #   print "\e[2J\e[f"
+  # end
+
 end
