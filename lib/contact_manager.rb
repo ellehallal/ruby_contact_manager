@@ -26,38 +26,14 @@ class ContactManager
       when "1"
         @contact.create_new_entry
       when "2"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           @contact.display_contacts
         end
 
       when "3"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           puts "Sort by:"
@@ -85,19 +61,7 @@ class ContactManager
 
 
       when "4"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           puts "Search by:"
@@ -134,19 +98,7 @@ class ContactManager
         end
 
       when "5"
-        while @contact.contacts.empty?
-          puts "You do not have any contacts. Would you like to add a new contact?"
-          puts "Y / N"
-          add_new_contact = $stdin.gets.chomp.upcase
-
-          if add_new_contact == "Y"
-            @contact.create_new_entry
-          elsif add_new_contact == "N"
-            break
-          else
-            puts "Sorry, that isn't a valid selection."
-          end
-        end
+        empty_contacts
 
         if @contact.contacts.empty? == false
           @contact.delete_contact
@@ -160,5 +112,24 @@ class ContactManager
       end
     end
     puts "Thanks for using Contact Manager."
+  end
+end
+
+
+private
+
+def empty_contacts
+  while @contact.contacts.empty?
+    puts "You do not have any contacts. Would you like to add a new contact?"
+    puts "Y / N"
+    add_new_contact = $stdin.gets.chomp.upcase
+
+    if add_new_contact == "Y"
+      @contact.create_new_entry
+    elsif add_new_contact == "N"
+      break
+    else
+      puts "Sorry, that isn't a valid selection."
+    end
   end
 end
