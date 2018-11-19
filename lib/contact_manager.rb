@@ -69,13 +69,13 @@ class ContactManager
 
           case sort_selection
           when "1"
-            @contact.sort_by("first_name")
+            @contact.sort_by_key("first_name")
             @contact.display_contacts
           when "2"
-            @contact.sort_by("last_name")
+            @contact.sort_by_key("last_name")
             @contact.display_contacts
           when "3"
-            @contact.sort_by("email_address")
+            @contact.sort_by_key("email_address")
             @contact.display_contacts
           else
             puts "Sorry, that's an invalid selection. Please try again"
@@ -128,7 +128,7 @@ class ContactManager
             search_for = $stdin.gets.chomp
             @contact.search_phone(search_for)
 
-          when "5"
+          else
             puts "Sorry, that's an invalid selection. Please try again:"
           end
         end
