@@ -19,3 +19,4 @@ Create a command line program to store, search and view your contacts
 - [x] User can search for a contact by email address and phone number
 - [x] Display output in different colours
 - [x] User can edit a contact
+- [x] Keep the UI static (i.e. experiment with clear screen to keep the UI in one place)
