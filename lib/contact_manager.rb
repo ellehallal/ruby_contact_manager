@@ -1,10 +1,12 @@
 class ContactManager
   require 'contact'
+  require 'display'
 
   attr_reader :contact
 
-  def initialize
-    @contact = Contact.new
+  def initialize(display = Display.new, contact = Contact.new)
+    @display = display
+    @contact = contact
   end
 
   def begin
@@ -14,15 +16,7 @@ class ContactManager
     puts 'Welcome to Contact Manager'
 
     while exit_contact_manager == 'N'
-      puts 'Please select a number from 1 - 7:'
-      puts '1. Add a new contact'
-      puts '2. View all contacts'
-      puts '3. Sort by...'
-      puts '4. Search for a contact'
-      puts '5. Edit a contact'
-      puts '6. Delete a contact'
-      puts '7. Exit Contact Manager'
-      print '>'
+      @display.main_options
       selection = $stdin.gets.chomp
 
       case selection
