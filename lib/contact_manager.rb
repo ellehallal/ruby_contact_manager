@@ -1,10 +1,10 @@
 class ContactManager
-  require 'contact'
+  require 'manage_contacts'
   require 'display'
 
   attr_reader :contact
 
-  def initialize(display = Display.new, contact = Contact.new)
+  def initialize(display = Display.new, contact = ManageContacts.new)
     @display = display
     @contact = contact
   end

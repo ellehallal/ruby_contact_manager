@@ -91,7 +91,7 @@ RSpec.describe Display do
 
   it 'displays search term message' do
     expect do
-      @display.display_search_term("first name", "El")
+      @display.display_search_term('first name', 'El')
     end.to output("Contacts with first name starting with El:\n").to_stdout
   end
 
@@ -112,5 +112,4 @@ RSpec.describe Display do
       @display.contacts_message
     end.to output("Here are your contacts:\n").to_stdout
   end
-
 end
