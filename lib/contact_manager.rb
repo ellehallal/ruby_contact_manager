@@ -11,9 +11,8 @@ class ContactManager
 
   def begin
     exit_contact_manager = 'N'
-    clear_screen
-    puts ''
-    puts 'Welcome to Contact Manager'
+    @display.clear_screen
+    @display.welcome
 
     while exit_contact_manager == 'N'
       @display.main_options
@@ -31,10 +30,7 @@ class ContactManager
         empty_contacts
 
         if @contact.contacts.empty? == false
-          puts 'Sort by:'
-          puts '1. First name'
-          puts '2. Last name'
-          puts '3. Email address'
+          @display.sort_by_options
 
           sort_selection = $stdin.gets.chomp
 
@@ -49,7 +45,7 @@ class ContactManager
             @contact.sort_by_key('email_address')
             @contact.display_contacts
           else
-            puts "Sorry, that's an invalid selection. Please try again"
+            @display.invalid_selection
           end
         end
 
@@ -57,36 +53,32 @@ class ContactManager
         empty_contacts
 
         if @contact.contacts.empty? == false
-          puts 'Search by:'
-          puts '1. First name'
-          puts '2. Last name'
-          puts '3. Email address'
-          puts '4. Phone number'
+          @display.search_by_options
 
           selection = $stdin.gets.chomp
 
           case selection
           when '1'
-            puts 'Please enter your search term:'
+            @display.search_term_prompt
             search_for = $stdin.gets.chomp
             @contact.search_first_name(search_for)
           when '2'
-            puts 'Please enter your search term:'
+            @display.search_term_prompt
             search_for = $stdin.gets.chomp
             @contact.search_last_name(search_for)
 
           when '3'
-            puts 'Please enter your search term:'
+            @display.search_term_prompt
             search_for = $stdin.gets.chomp
             @contact.search_email(search_for)
 
           when '4'
-            puts 'Please enter your search term:'
+            @display.search_term_prompt
             search_for = $stdin.gets.chomp
             @contact.search_phone(search_for)
 
           else
-            puts "Sorry, that's an invalid selection. Please try again:"
+            @display.invalid_selection
           end
         end
 
@@ -98,7 +90,7 @@ class ContactManager
         empty_contacts
 
         if contact.contacts.length == 1
-          puts 'You only have one contact. Would you like to delete it? Y/N'
+          @display.delete_single_contact_warning
           delete_selection = $stdin.gets.chomp.upcase
 
           @contact.delete_contact if delete_selection == 'Y'
@@ -110,10 +102,10 @@ class ContactManager
         exit_contact_manager = 'Y'
 
       else
-        puts 'Sorry, that is an invalid selection. Please try again.'
+        @display.invalid_selection
       end
     end
-    puts 'Thanks for using Contact Manager.'
+    @display.exit_message
   end
 end
 
@@ -121,8 +113,7 @@ private
 
 def empty_contacts
   while @contact.contacts.empty?
-    puts 'You do not have any contacts. Would you like to add a new contact?'
-    puts 'Y / N'
+    @display.empty_contacts
     add_new_contact = $stdin.gets.chomp.upcase
 
     if add_new_contact == 'Y'
@@ -130,11 +121,7 @@ def empty_contacts
     elsif add_new_contact == 'N'
       break
     else
-      puts "Sorry, that isn't a valid selection."
+      @display.invalid_selection
     end
   end
-end
-
-def clear_screen
-  print "\e[2J\e[f"
 end

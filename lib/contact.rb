@@ -14,38 +14,36 @@ class Contact
   end
 
   def create_new_entry
-    puts 'Please enter the first name below:'
+    @display.request_contact_info('first name')
     first = $stdin.gets.chomp.capitalize
 
-    puts 'Please enter the last name below:'
+    @display.request_contact_info('last name')
     last = $stdin.gets.chomp.capitalize
 
-    puts 'Please enter the email address below:'
+    @display.request_contact_info('email address')
     email = $stdin.gets.chomp.downcase
 
-    puts 'Please enter the phone number below (e.g. 07999000111):'
+    @display.request_contact_info('phone number')
     phone = $stdin.gets.chomp.scan(/\d+/).join
 
     add_contact_to_file(first, last, email, phone)
     @contacts << { 'first_name' => first, 'last_name' => last, 'email_address' => email, 'phone_number' => phone }
     sort_by_key('first_name')
 
-    clear_screen
+    @display.clear_screen
     @display.display_new_entry(first, last, email, phone)
-
-    
   end
 
   def display_contacts
-    clear_screen
-    puts 'Here are your contacts:'
-    puts ''
+    @display.clear_screen
+    @display.contacts_message
+    @display.insert_blank_line
 
     @contacts.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:cyan)
       end
-      puts ''
+      @display.insert_blank_line
     end
   end
 
@@ -60,15 +58,15 @@ class Contact
       entry['first_name'].start_with?(search_term.capitalize)
     end
 
-    clear_screen
+    @display.clear_screen
+    @display.display_search_term("first names", search_term.downcase)
+    @display.insert_blank_line
 
-    puts "Contacts with first names starting with #{search_term.capitalize}:"
-    puts ''
     search.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:yellow)
       end
-      puts ''
+      @display.insert_blank_line
     end
   end
 
@@ -77,15 +75,15 @@ class Contact
       entry['last_name'].start_with?(search_term.capitalize)
     end
 
-    clear_screen
+    @display.clear_screen
+    @display.display_search_term("last names", search_term.downcase)
+    @display.insert_blank_line
 
-    puts "Contacts with last names starting with #{search_term.capitalize}:"
-    puts ''
     search.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:yellow)
       end
-      puts ''
+      @display.insert_blank_line
     end
   end
 
@@ -94,15 +92,15 @@ class Contact
       entry['email_address'].start_with?(search_term.downcase)
     end
 
-    clear_screen
+    @display.clear_screen
+    @display.display_search_term("email address", search_term.downcase)
+    @display.insert_blank_line
 
-    puts "Contacts with an email address starting with #{search_term.downcase}:"
-    puts ''
     search.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:yellow)
       end
-      puts ''
+      @display.insert_blank_line
     end
   end
 
@@ -111,26 +109,26 @@ class Contact
       entry['phone_number'].start_with?(search_term.downcase)
     end
 
-    clear_screen
-
-    puts "Contacts with a phone number starting with #{search_term}:"
-    puts ''
+    @display.clear_screen
+    @display.display_search_term("a phone number", search_term)
+    @display.insert_blank_line
+    
     search.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:yellow)
       end
-      puts ''
+      @display.insert_blank_line
     end
   end
 
   def delete_contact
-    puts ''
+    @display.insert_blank_line
     @contacts.each_with_index do |entry, index|
       puts "#{index + 1}:"
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:magenta)
       end
-      puts ''
+      @display.insert_blank_line
     end
 
     deleted_contact = []
@@ -139,7 +137,7 @@ class Contact
       deleted_contact << @contacts[0]
       @contacts.delete_at(0)
     else
-      puts 'Please select which contact you wish to delete (select a number)'
+      @display.delete_or_edit_prompt('delete')
 
       selection = get_selection
 
@@ -152,66 +150,59 @@ class Contact
       file.write @contacts.to_json
     end
 
-    clear_screen
-    puts ''
+    @display.clear_screen
     deleted_contact.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:red)
       end
-      puts 'The contact above has been deleted'
-      puts ''
+      @display.delete_or_edit_confirmation('deleted')
+      @display.insert_blank_line
     end
   end
 
   def edit_contact
-    puts ''
+    @display.insert_blank_line
     @contacts.each_with_index do |entry, index|
       puts "#{index + 1}:"
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:magenta)
       end
-      puts ''
+      @display.insert_blank_line
     end
 
     edited_contact = []
 
-    puts 'Please select which contact you wish to edit (select a number)'
+    @display.delete_or_edit_prompt('edit')
 
     selection = get_selection
-
     index_to_edit = selection -= 1
-    puts ''
-    puts 'What detail would you like to edit? (Select 1 - 4)'
-    puts '1. First name'
-    puts '2. Last name'
-    puts '3. Email address'
-    puts '4. Phone number'
 
+    @display.edit_contact
     edit_selection = $stdin.gets.chomp
 
     case edit_selection
     when '1'
-      puts 'Please enter the new first name:'
+      @display.request_contact_info('new first name')
       new_detail = $stdin.gets.chomp
       @contacts[index_to_edit]['first_name'] = new_detail
 
     when '2'
-      puts 'Please enter the new last name:'
+      @display.request_contact_info('new last name')
       new_detail = $stdin.gets.chomp
       @contacts[index_to_edit]['last_name'] = new_detail
 
     when '3'
-      puts 'Please enter the new email address:'
+      @display.request_contact_info('new email address')
       new_detail = $stdin.gets.chomp
       @contacts[index_to_edit]['email_address'] = new_detail
 
     when '4'
-      puts 'Please enter the new phone number:'
+      @display.request_contact_info('new phone number')
       new_detail = $stdin.gets.chomp
       @contacts[index_to_edit]['phone_number'] = new_detail
 
     else
-      puts "Sorry, that isn't a valid selection. Please try again."
+      @display.invalid_selection
     end
 
     edited_contact << @contacts[index_to_edit]
@@ -220,14 +211,14 @@ class Contact
       file.write @contacts.to_json
     end
 
-    clear_screen
-    puts ''
+    @display.clear_screen
+
     edited_contact.each do |entry|
       entry.each do |key, value|
         puts "#{key}: #{value}".colorize(:red)
       end
-      puts 'The contact above has been edited'
-      puts ''
+      @display.delete_or_edit_confirmation('edited')
+      @display.insert_blank_line
     end
   end
 
@@ -249,13 +240,9 @@ class Contact
   def get_selection
     selection = $stdin.gets.chomp.to_i
     while (1..@contacts.length).to_a.include?(selection) == false
-      puts "You've entered an invalid selection. Please try again:"
+      @display.invalid_selection
       selection = $stdin.gets.chomp.to_i
     end
     selection
-  end
-
-  def clear_screen
-    print "\e[2J\e[f"
   end
 end
