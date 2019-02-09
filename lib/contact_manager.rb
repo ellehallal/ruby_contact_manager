@@ -14,7 +14,7 @@ class ContactManager
     puts "Welcome to Contact Manager"
 
     while exit_contact_manager == "N"
-      puts "Please select a number from 1 - 5:"
+      puts "Please select a number from 1 - 7:"
       puts "1. Add a new contact"
       puts "2. View all contacts"
       puts "3. Sort by..."
