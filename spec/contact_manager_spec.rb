@@ -16,10 +16,4 @@ RSpec.describe ContactManager do
   it 'creates a new instance of the ContactManager class' do
     expect(@contact_manager.is_a?(Object)).to eq(true)
   end
-
-  xit 'adds a new contact to @contacts' do
-    allow($stdin).to receive(:gets).and_return('1', 'Elle', 'H', 'elle@hello.com', '07999999999')
-    @contact_manager.begin
-    expect(@contact_manager.contact.contacts.empty?).to eq(false)
-  end
 end

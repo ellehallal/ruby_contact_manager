@@ -1,22 +1,61 @@
 # Contact Manager
 
-Create a command line program to store, search and view your contacts
+A Ruby command line application, which allows the user to store (in a JSON file), search and view their contacts.
 
-## Core features
+- [Contact Manager](#contact-manager)
+  - [Preview](#preview)
+  - [Features](#features)
+  - [Install](#install)
+  - [Testing](#testing)
+      - [Running Tests](#running-tests)
+  - [To Do](#to-do)
+  - [Related Blog Posts](#related-blog-posts)
 
-- [x] User should be able to enter a contact (name, email, phone number)
-- [x] User should be able to see a list of all of my contacts in alphabetical order by first name, last name and email address
-- [x] User should be able to search for a contact by name and view their details
+## Preview
 
-## Stretch Goals
+![Contact Manager Preview](ruby-contact-manager.gif)
 
-- [x] Save the contacts to a file
-- [x] Load the contacts from that file when restarting the program
+## Features
 
-## Stretch Stretch Goals
+- The user can:
+  - Add a new contact (first name, last name, email, phone number)
+  - View a list of their contacts
+  - Sort contacts alphabetically by first name, last name and email address
+  - Search for a contact by first name, last name, email, or phone number and view their details
+  - Edit and delete a contact
+- All contacts are saved in a JSON file ( `./lib/contacts.json`) and loads when the application starts
+- The output displays in different colours
+- The UI is static
 
-- [x] User can delete a contact
-- [x] User can search for a contact by email address and phone number
-- [x] Display output in different colours
-- [x] User can edit a contact
-- [x] Keep the UI static (i.e. experiment with clear screen to keep the UI in one place)
+## Install
+
+Note: if you don't have Ruby installed, you can find instructions [here](https://www.ruby-lang.org/en/documentation/installation/).
+
+```
+git clone https://github.com/itsellej/ruby_contact_manager.git
+cd ruby-contact-manager
+ruby bin/console
+```
+
+## Testing
+
+All classes are tested using RSpec.
+
+#### Running Tests
+
+To run all tests, in the terminal, type: `rspec`
+
+To run tests for individual classes: `rspec spec/[name of test file]`
+
+## To Do
+
+- Implement the methods in the Validation class to check user's input
+- Condense methods to adhere to the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)
+- Extract methods which interact with the JSON file to a separate class
+- Test output of selection options available in the ContactManager class
+- Create a mock JSON file for tests
+- Experiment with storing contacts in a database
+
+## Related Blog Posts
+Blog posts published to [Medium](https://medium.com/@ellehallal/) during the creation of Contact Manager:
+- [Testing input with Rspec & an intro to JSON](https://medium.com/@ellehallal/week-4-testing-input-with-rspec-an-intro-to-json-4354ade41900)
