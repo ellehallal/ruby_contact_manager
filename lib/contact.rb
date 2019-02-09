@@ -1,10 +1,12 @@
 class Contact
+  require 'display'
   require 'json'
   require 'colorize'
 
   attr_reader :contacts
 
-  def initialize
+  def initialize(display=Display.new)
+    @display = display
     @contacts = []
     get_contacts_from_file('./lib/contacts.json').each do |contact|
       @contacts << contact
@@ -29,14 +31,9 @@ class Contact
     sort_by_key('first_name')
 
     clear_screen
+    @display.display_new_entry(first, last, email, phone)
 
-    puts ''
-    puts "Here's your new contact:"
-    puts "First name: #{first}".colorize(:green)
-    puts "Last name: #{last}".colorize(:green)
-    puts "Email address: #{email}".colorize(:green)
-    puts "Phone number: #{phone}".colorize(:green)
-    puts ''
+    
   end
 
   def display_contacts

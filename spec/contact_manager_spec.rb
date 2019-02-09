@@ -14,7 +14,7 @@ RSpec.describe ContactManager do
   end
 
   it 'creates a new instance of the ContactManager class' do
-    expect(@contact_manager.is_a?(bject)).to eq(true)
+    expect(@contact_manager.is_a?(Object)).to eq(true)
   end
 
   xit 'adds a new contact to @contacts' do
